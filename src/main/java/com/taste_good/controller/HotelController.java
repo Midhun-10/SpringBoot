@@ -22,7 +22,7 @@ public class HotelController {
         return hotelService.addHotel(hotel);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Hotel> getAllHotels() {
         return hotelService.getAllHotels();
     }

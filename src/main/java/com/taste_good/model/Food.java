@@ -1,6 +1,7 @@
 package com.taste_good.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Transient;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,8 +22,13 @@ public class Food {
 
 	@ManyToOne
 	@JoinColumn(name = "hotel_id")
-	@JsonBackReference
+	@JsonIgnore
 	private Hotel hotel;
+
+	@Transient
+	public String getHotelName() {
+	    return hotel != null ? hotel.getHotelName() : null;
+	}
 
 	public int getFid() {
 		return fid;

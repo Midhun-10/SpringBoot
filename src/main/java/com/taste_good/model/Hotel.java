@@ -3,10 +3,11 @@ package com.taste_good.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,10 +22,10 @@ public class Hotel {
 	private String hotelName;
 	private String img;
 	private String location;
-	private long contact;
+	private String contact;
 
-	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL,orphanRemoval = true)
-	@JsonManagedReference
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<Food> foodList = new ArrayList<>();
 	
 	public void addFood(Food food) {
@@ -69,11 +70,11 @@ public class Hotel {
 		this.location = location;
 	}
 
-	public long getContact() {
+	public String getContact() {
 		return contact;
 	}
 
-	public void setContact(long contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
